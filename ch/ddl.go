@@ -25,11 +25,11 @@ func (w *Workloader) createTableDDL(ctx context.Context, query string, tableName
 func (w *Workloader) createTables(ctx context.Context) error {
 	query := `
 CREATE TABLE IF NOT EXISTS nation (
-    N_NATIONKEY BIGINT NOT NULL,
-    N_NAME CHAR(25) NOT NULL,
-    N_REGIONKEY BIGINT NOT NULL,
+    N_NATIONKEY BIGINT NULL,
+    N_NAME CHAR(25) NULL,
+    N_REGIONKEY BIGINT NULL,
     N_COMMENT VARCHAR(152),
-    PRIMARY KEY (N_NATIONKEY)
+    UNIQUE KEY (N_NATIONKEY)
 )`
 
 	if err := w.createTableDDL(ctx, query, "nation", "creating"); err != nil {
@@ -38,10 +38,10 @@ CREATE TABLE IF NOT EXISTS nation (
 
 	query = `
 CREATE TABLE IF NOT EXISTS region (
-    R_REGIONKEY BIGINT NOT NULL,
-    R_NAME CHAR(25) NOT NULL,
+    R_REGIONKEY BIGINT NULL,
+    R_NAME CHAR(25) NULL,
     R_COMMENT VARCHAR(152),
-    PRIMARY KEY (R_REGIONKEY)
+    UNIQUE KEY (R_REGIONKEY)
 )`
 	if err := w.createTableDDL(ctx, query, "region", "creating"); err != nil {
 		return err
@@ -49,14 +49,14 @@ CREATE TABLE IF NOT EXISTS region (
 
 	query = `
 CREATE TABLE IF NOT EXISTS supplier (
-    S_SUPPKEY BIGINT NOT NULL,
-    S_NAME CHAR(25) NOT NULL,
-    S_ADDRESS VARCHAR(40) NOT NULL,
-    S_NATIONKEY BIGINT NOT NULL,
-    S_PHONE CHAR(15) NOT NULL,
-    S_ACCTBAL DECIMAL(15, 2) NOT NULL,
-    S_COMMENT VARCHAR(101) NOT NULL,
-    PRIMARY KEY (S_SUPPKEY)
+    S_SUPPKEY BIGINT NULL,
+    S_NAME CHAR(25) NULL,
+    S_ADDRESS VARCHAR(40) NULL,
+    S_NATIONKEY BIGINT NULL,
+    S_PHONE CHAR(15) NULL,
+    S_ACCTBAL DECIMAL(15, 2) NULL,
+    S_COMMENT VARCHAR(101) NULL,
+    UNIQUE KEY (S_SUPPKEY)
 )`
 	if err := w.createTableDDL(ctx, query, "supplier", "creating"); err != nil {
 		return err
